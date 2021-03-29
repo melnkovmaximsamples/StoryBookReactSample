@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { getCell } from './components/Cell';
-import { Field } from './components/Field';
+import { Field } from './elements/Field';
 
 ReactDOM.render(
   <Field />,
