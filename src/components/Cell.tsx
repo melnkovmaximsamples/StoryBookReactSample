@@ -1,24 +1,16 @@
-import React from 'react';
-import { ICellProps } from '../interfaces/ICellProps';
-import '../style/Cell.css';
+import { stringify } from 'node:querystring';
+import React from 'react'
+import { ICellProps } from '../interfaces/ICellProps'
+import '../style/Cell.css'
 
-/* interface ICellProps {
-    isClicked: boolean;
-    content: string;
-}
-
-export const Cell : React.FC<ICellProps> = ({isClicked, content}) => {
-    return <div className="cell">{isClicked == true ? content : ""}</div>
-} */
-
-const Cell: React.FC<ICellProps> = ({ filled, x, y, onClick }) => {
-    if (filled) {
-        return <span className="cell cell-filled">{filled}</span>
+const Cell: React.FC<ICellProps> = ({content, x, y, onClick }) => {
+    console.log(content);
+    
+    if (content !== '') {
+        return (<span className="cell cell-filled">{content}</span>)
     }
 
-    return (<button className="cell cell-empty" onClick={() => onClick(x || 0, y || 0)}></button>)
-}
+    return (<button className="cell cell-empty" onClick={() => onClick(x, y)}></button>);
+};
 
 export default Cell;
-
-export function getCell(props: ICellProps) { return <Cell {...props}/> };

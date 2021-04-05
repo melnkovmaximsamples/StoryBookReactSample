@@ -3,11 +3,10 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { getCell } from './components/Cell';
-import { Field } from './elements/Field';
+import InteractiveField from './components/InteractiveField';
 
 ReactDOM.render(
-  <Field />,
+  <InteractiveField size={5} />,
   document.getElementById('root')
 );
 
