@@ -1,14 +1,8 @@
 import React from 'react';
 import Field from './Field';
-
-interface IInteractiveFieldProps {
-    size: number;
-}
-
-interface IInteractiveFieldState extends IInteractiveFieldProps {
-    field: string[][];
-    lastValue: string;
-}
+import '../style/InteractiveField.css';
+import { IInteractiveFieldProps } from '../interfaces/IInteractiveFieldProps';
+import { IInteractiveFieldState } from '../interfaces/IInteractiveFieldState';
 
 export class InteractiveField extends React.Component<IInteractiveFieldProps, IInteractiveFieldState> {
 
@@ -22,8 +16,11 @@ export class InteractiveField extends React.Component<IInteractiveFieldProps, II
             field: field,
             lastValue: ''
         };
-        this.onClick = this.onClick.bind(this);
 
+        document.documentElement.style.setProperty(`--columns`, `${props.size}`);
+        document.documentElement.style.setProperty(`--rows`, `${props.size}`);
+
+        this.onClick = this.onClick.bind(this);
     }
 
     onClick(x: number, y: number): void {
@@ -40,16 +37,10 @@ export class InteractiveField extends React.Component<IInteractiveFieldProps, II
 
 
     render() {
-        const stylse: any = {
-            display: "grid",
-            gridTemplateRows: "repeat(5, 100px)",
-            gridTemplateColumns: "repeat(5, 100px)",
-        }
-
-        console.log('render interactive field');
-        return (<div style={stylse}><Field field={this.state.field} size={this.state.size} onClick={this.onClick}/></div>)
+        return (<div><Field field={this.state.field} size={this.state.size} onClick={this.onClick}/></div>)
     }
 
 }
 
 export default InteractiveField;
+export const getInteractiveField = (props: IInteractiveFieldProps) => <InteractiveField {...props} />

@@ -4,9 +4,10 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import InteractiveField from './components/InteractiveField';
+import { getInteractiveField } from './components/InteractiveField';
 
 ReactDOM.render(
-  <InteractiveField size={5} />,
+  getInteractiveField({size: 5}),
   document.getElementById('root')
 );
 

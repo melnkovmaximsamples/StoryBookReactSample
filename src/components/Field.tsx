@@ -1,13 +1,9 @@
 import React from 'react';
 import { isThisTypeNode } from 'typescript';
-import { IFieldProps } from '../interfaces/IFieldProps';
 import Cell from './Cell';
+import { IFieldProps } from '../interfaces/IFieldProps';
+import { IFieldState } from '../interfaces/IFieldState';
 
-interface IFieldState {
-    size: number,
-    field: string[][],
-    onClick: (x: number, y: number) => void;
-}
 
 export class Field extends React.Component<IFieldProps, IFieldState> {
     constructor(props: IFieldProps) {
