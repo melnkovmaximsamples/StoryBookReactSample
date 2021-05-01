@@ -1,3 +1,3 @@
-export interface IInteractiveFieldProps {
-    size: number;
+export interface InteractiveFieldProps {
+  size: number;
 }

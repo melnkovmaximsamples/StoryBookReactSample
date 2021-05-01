@@ -1,20 +1,17 @@
-import React from 'react';
-import { ICellProps } from '../interfaces/ICellProps';
+import React from "react";
+import { CellProps } from "../interfaces/CellProps";
 
-export const Cell = ({ content, x, y, onClick }: ICellProps) => {
-    content 
+export const getCell = ({ content, x, y, onClick }: CellProps) => {
+  content
     ? React.createElement(
         "span",
         {
-            className: "cell cell-filled"
+          className: "cell cell-filled",
         },
         content
-    )
-    : React.createElement(
-        "button",
-        {
-            className: "cell",
-            onClick: onClick(x, y)
-        },
-    );
-}
+      )
+    : React.createElement("button", {
+        className: "cell",
+        onClick: onClick(x, y),
+      });
+};

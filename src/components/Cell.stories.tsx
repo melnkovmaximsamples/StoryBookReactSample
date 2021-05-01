@@ -1,40 +1,55 @@
 import { action } from "@storybook/addon-actions";
 import { number, text, withKnobs } from "@storybook/addon-knobs";
-import { render } from "@testing-library/react";
-import React from "react";
+import Cell, { getCell } from "./Cell";
 
-import Cell from "./Cell";
-
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   title: "Cell component",
   decoratorcs: [withKnobs],
 };
 
-export const nonFilled = () => (
+export const nonFilled = () => [
   <Cell
     x={number("x", 1)}
     y={number("y", 1)}
     onClick={action("cellClick")}
     key="jsx"
-  />
-);
+  />,
+  getCell({
+    x: number("x", 1),
+    y: number("y", 1),
+    onClick: action("cellClick"),
+  }),
+];
 
-export const filledWithX = () => (
+export const filledWithX = () => [
   <Cell
     content={text("filled with", "X")}
     x={number("x", 1)}
     y={number("y", 1)}
     onClick={action("onCellClicked(jsx)")}
     key="jsx"
-  />
-);
+  />,
+  getCell({
+    content: text("filled with", "X"),
+    x: number("X", 1),
+    y: number("Y", 1),
+    onClick: action("onCellClicked"),
+  }),
+];
 
-export const filledWithY = () => (
+export const filledWithY = () => [
   <Cell
     content={text("filled with", "Y")}
     x={number("X", 1)}
     y={number("Y", 1)}
     onClick={action("onCellClicked(jsx)")}
     key="jsx"
-  />
-);
+  />,
+  getCell({
+    content: text("filled with", "Y"),
+    x: number("X", 1),
+    y: number("Y", 1),
+    onClick: action("onCellClicked"),
+  }),
+];

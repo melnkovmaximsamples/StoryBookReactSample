@@ -1,46 +1,54 @@
-import React from 'react';
-import Field from './Field';
-import '../style/InteractiveField.css';
-import { IInteractiveFieldProps } from '../interfaces/IInteractiveFieldProps';
-import { IInteractiveFieldState } from '../interfaces/IInteractiveFieldState';
+import React from "react";
+import Field from "./Field";
+import { InteractiveFieldProps } from "../interfaces/InteractiveFieldProps";
+import { InteractiveFieldState } from "../interfaces/InteractiveFieldState";
 
-export class InteractiveField extends React.Component<IInteractiveFieldProps, IInteractiveFieldState> {
+export class InteractiveField extends React.Component<
+  InteractiveFieldProps,
+  InteractiveFieldState
+> {
+  constructor(props: InteractiveFieldProps) {
+    super(props);
 
-    constructor(props: IInteractiveFieldProps) {
-        super(props);
+    let field = this.getEmptyFieldBySize(props.size);
 
-        let field = this.getEmptyFieldBySize(props.size);
+    this.state = {
+      size: props.size,
+      field: field,
+      lastValue: "",
+    };
 
-        this.state = {
-            size: props.size,
-            field: field,
-            lastValue: ''
-        };
+    this.onClick = this.onClick.bind(this);
+  }
 
-        document.documentElement.style.setProperty(`--columns`, `${props.size}`);
-        document.documentElement.style.setProperty(`--rows`, `${props.size}`);
+  onClick(x: number, y: number): void {
+    let field = this.state.field.slice();
 
-        this.onClick = this.onClick.bind(this);
-    }
+    field[x][y] = this.state.lastValue === "X" ? "O" : "X";
 
-    onClick(x: number, y: number): void {
-        let field = this.state.field.slice();
+    this.setState({ field: field, lastValue: field[x][y] });
+  }
 
-        field[x][y] = this.state.lastValue == 'X' ? 'O' : 'X';
+  getEmptyFieldBySize(size: number): string[][] {
+    return Array.from({ length: size }, () =>
+      Array.from({ length: size }, () => "")
+    );
+  }
 
-        this.setState({ field: field, lastValue: field[x][y] });
-    }
-
-    getEmptyFieldBySize(size: number): string[][] {
-        return Array.from({length: size}, () => Array.from({length: size}, () => ''));
-    }
-
-
-    render() {
-        return (<div><Field field={this.state.field} size={this.state.size} onClick={this.onClick}/></div>)
-    }
-
+  render() {
+    return (
+      <div>
+        <Field
+          field={this.state.field}
+          size={this.state.size}
+          onClick={this.onClick}
+        />
+      </div>
+    );
+  }
 }
 
 export default InteractiveField;
-export const getInteractiveField = (props: IInteractiveFieldProps) => <InteractiveField {...props} />
+export const getInteractiveField = (props: InteractiveFieldProps) => (
+  <InteractiveField {...props} />
+);

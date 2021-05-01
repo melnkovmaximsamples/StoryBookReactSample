@@ -1,4 +1,3 @@
-import { IFieldProps } from '../interfaces/IFieldProps';
+import { FieldProps } from "../interfaces/FieldProps";
 
-export interface IFieldState extends IFieldProps {
-}
+export interface FieldState extends FieldProps {}
